@@ -36,9 +36,15 @@ class Main extends \pocketmine\plugin\PluginBase implements \pocketmine\event\Li
 				if($args[1] == "join"){
 					if(!$this->getArena($args[1])->get("1vs1") == null){
 						if($this->getArena($args[1])->get("p1") == null){
-							$this->getArena($args[1])->set("p1", $event->getPlayer()->getName());
+							$this->getArena($args[1])->set("p1", $sender->getPlayer()->getName());
+							$this->getArena($args[1])->save();
 							$this->getPlayerConfig($sender->getPlayer()->getName())->set("Arena", $args[1]);
-						}
+							$this->getPlayerConfig($sender->getPlayer()->getName())->save();
+							$sender->getPlayer()->sendMessage("Wait a second player");
+						}else{
+							if($this->getArena($args[1])->get("p2") == null){
+								
+							}
 					}else{
 						$sender->sendMessage("This arena [$args[1]] not found !");
 					}
