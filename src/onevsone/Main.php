@@ -1,3 +1,4 @@
+<?php
 namespace onevsone;
 class Main extends \pocketmine\plugin\PluginBase implements \pocketmine\event\Listener{
 	public function onEnable(){
@@ -6,3 +7,4 @@ class Main extends \pocketmine\plugin\PluginBase implements \pocketmine\event\Li
 		@mkdir($this->getDataFolder()."arena");
 	}
 }
+?>
