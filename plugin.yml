@@ -5,3 +5,4 @@ api: 2.0.0
 authors: [Nawaf_Craft1b, iBa4x]
 commands:
   1vs1:
+    description: MiniGames One Vs One.
