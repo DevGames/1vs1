@@ -92,13 +92,13 @@ class Main extends \pocketmine\plugin\PluginBase implements \pocketmine\event\Li
 					if($args[0] == "setspawn1"){
 						$arena->set("spawn1",array($x,$y,$z,$level));
 						$arena->save();
-						$sender->sendMessage("spawn player 1 x: $x y: $y z: $z level: $level");
+						$sender->sendMessage("set spawn player 1");
 						return true;
 					}
 					if($args[0] == "setspawn2"){
 						$arena->set("spawn2",array($x,$y,$z,$level));
 						$arena->save();
-						$sender->sendMessage("spawn player 2 x: $x y: $y z: $z level: $level");
+						$sender->sendMessage("set spawn player 2");
 						return true;
 					}
 				}
