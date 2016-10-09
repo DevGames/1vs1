@@ -58,6 +58,7 @@ class Main extends \pocketmine\plugin\PluginBase implements \pocketmine\event\Li
 							}else{
 								$sender->getPlayer()->sendMessage("This arena $args[1] full");
 							}
+						}
 					}else{
 						$sender->sendMessage("This arena [$args[1]] not found !");
 					}
