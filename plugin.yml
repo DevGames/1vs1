@@ -5,4 +5,3 @@ api: 2.0.0
 authors: [Nawaf_Craft1b, iBa4x]
 commands:
   1vs1:
-    usage: "/1vs1 <join/leave/create/setspawn1/setspawn2> <arena>"
