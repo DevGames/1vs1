@@ -5,8 +5,7 @@ class Main extends \pocketmine\plugin\PluginBase implements \pocketmine\event\Li
 		$this->getServer()->getPluginManager()->registerEvents($this, $this);
 		@mkdir($this->getDataFolder());
 		@mkdir($this->getDataFolder()."arena");
-	}
-	public function getArena($name){
+	}	public function getArena($name){
 		$arena = new \pocketmine\utils\Config($this->getDataFolder()."arena/".$name.".yml",\pocketmine\utils\Config::YAML);
 		return $arena;
 	}
@@ -68,7 +67,7 @@ class Main extends \pocketmine\plugin\PluginBase implements \pocketmine\event\Li
 				if(!$arena->get("1vs1") == null){
 					if($arena->get("p1") == null){
 						$arena->set("p1", $event->getPlayer()->getName());
-						$event->getPlayer()->sendMessage("what the player 2 ...");
+						$event->getPlayer()->sendMessage("Wait a second player");
 					}else{
 						if($arena->get("p2") == null){
 							$arena->set("p2", $event->getPlayer()->getName());
