@@ -13,7 +13,18 @@ class Main extends \pocketmine\plugin\PluginBase implements \pocketmine\event\Li
 	public function onCommand(\pocketmine\command\CommandSender $sender,\pocketmine\command\Command $command, $label,array $args){
 		if($command->getName() == "1vs1"){
 			if($sender instanceof \pocketmine\Player){
-				if(isset($args[0])){
+				if($args[0] == "help"){
+					$sender->sendMessage("~^-help-^~");
+					$sender->sendMessage("/1vs1 join <arena> : join for arena");
+					$sender->sendMessage("/1vs1 leave <arena> : leave for arena");
+					if($sender->isOp){
+						$sender->sendMessage("/1vs1 create <arena> : create new arena");
+						$sender->sendMessage("/1vs1 setspawn1 <arena> : set spawn player 1 for arena");
+						$sender->sendMessage("/1vs1 setspawn2 <arena> : set spawn player 2 for arena");
+					}
+					$sender->sendMessage("~^-1vs1-^~");
+				}
+				if($sender->isOp()){
 					$arena = $this->getArena($args[1]);
 					$x = $sender->getFloorX();
 					$y = $sender->getFloorY();
@@ -40,7 +51,7 @@ class Main extends \pocketmine\plugin\PluginBase implements \pocketmine\event\Li
 					}
 				}
 			}else{
-				$sender->sendMessage("This command in Game !");
+				$sender->sendMessage("Please run in-game!");
 			}
 		}
 	}
@@ -64,7 +75,7 @@ class Main extends \pocketmine\plugin\PluginBase implements \pocketmine\event\Li
 							$event->getPlayer($p1)->teleport(\pocketmine\math\Vector3($spawn1[0],$spawn1[1],$spawn1[2],$spawn1[3]));
 							$event->getPlayer($p2)->teleport(\pocketmine\math\Vector3($spawn2[0],$spawn2[1],$spawn2[2],$spawn2[3]));
 							$event->getPlayer($p1)->sendMessage("Go Go Go.");
-							$event->getPlayer($p1)->sendMessage("Go Go Go.");
+							$event->getPlayer($p2)->sendMessage("Go Go Go.");
 						}else{
 							$event->getPlayer()->sendMessage("This arena $text[1] full");
 						}
