@@ -18,8 +18,7 @@ class Main extends \pocketmine\plugin\PluginBase implements \pocketmine\event\Li
 	public function getPlayerArena($player){
 		return $this->getPlayerConfig($player)->get("Arena");
 	}
-	public function onCommand(\pocketmine\command\CommandSender $sender,\pocketmine\command\Command $command, $label,array $args){
-		if($command->getName() == "1vs1"){
+	public function onCommand(\pocketmine\command\CommandSender $sender,\pocketmine\command\Command $command, $label,array $args){		if($command->getName() == "1vs1"){
  			if($sender instanceof \pocketmine\Player){
 				if($args[0] == "help"){
 					$sender->sendMessage("~^-help-^~");
@@ -49,8 +48,7 @@ class Main extends \pocketmine\plugin\PluginBase implements \pocketmine\event\Li
                 						$spawn2 = $arena->get("spawn2");
 								$this->getArena($args[1])->set("p2", $sender->getPlayer()->getName());
                 						$this->getArena($args[1])->save();
-                						$this->getPlayerConfig($sender->getPlayer()->getName())->set("Arena", $args[1]);
-                						$this->getPlayerConfig($sender->getPlayer()->getName())->save();
+                						$this->getPlayerConfig($sender->getPlayer()->getName())->set("Arena", $args[1]);                						$this->getPlayerConfig($sender->getPlayer()->getName())->save();
                 						$sender->getPlayer($p1)->teleport(\pocketmine\math\Vector3($spawn1[0],$spawn1[1],$spawn1[2],$spawn1[3]));
                 						$sender->getPlayer($p2)->teleport(\pocketmine\math\Vector3($spawn2[0],$spawn2[1],$spawn2[2],$spawn2[3]));
                 						$sender->getPlayer($p1)->sendMessage("Go Go Go.");
@@ -67,7 +65,7 @@ class Main extends \pocketmine\plugin\PluginBase implements \pocketmine\event\Li
 					$p1 = $this->getArena($this->getPlayerArena($sender->getPlayer()->getName()))->get("p1");
 					$p2 = $this->getArena($this->getPlayerArena($sender->getPlayer()->getName()))->get("p2");
 					if($p1 == $sender->getPlayer()->getName()){
-						$this->getArena($this->getPlayerArena($sender->getPlayer()->getName()))->unset("p1"):
+						$this->getArena($this->getPlayerArena($sender->getPlayer()->getName()))->unset("p1");
 					}else{
 						$this->getArena($this->getPlayerArena($sender->getPlayer()->getName()))->unset("p2");
 					}
