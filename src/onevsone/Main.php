@@ -6,7 +6,7 @@ class Main extends \pocketmine\plugin\PluginBase implements \pocketmine\event\Li
 		@mkdir($this->getDataFolder());
 		@mkdir($this->getDataFolder()."arena");
 		@mkdir($this->getDataFolder()."player");
-	}
+		}
 	public function getArena($name){
 		$arena = new \pocketmine\utils\Config($this->getDataFolder()."arena/".$name.".yml",\pocketmine\utils\Config::YAML);
 		return $arena;
@@ -16,7 +16,7 @@ class Main extends \pocketmine\plugin\PluginBase implements \pocketmine\event\Li
 		return $player;
 	}
 	public function getPlayerArena($player){
-		return $this->getPlayerConfig($player)->get("Arena");
+			return $this->getPlayerConfig($player)->get("Arena");
 	}
 	public function onCommand(\pocketmine\command\CommandSender $sender,\pocketmine\command\Command $command, $label,array $args){
 		if($command->getName() == "1vs1"){
@@ -31,12 +31,11 @@ class Main extends \pocketmine\plugin\PluginBase implements \pocketmine\event\Li
 						$sender->sendMessage("/1vs1 setspawn2 <arena> : set spawn player 2 for arena");
 					}
 					$sender->sendMessage("~^-1vs1-^~");
-					return true;
-				}
-				if($args[1] == "join"){
+					return true;				}
+				if($args[0] == "join"){
 					if(!$this->getArena($args[1])->get("1vs1") == null){
-            $p1 = $this->getArena($args[1])->get("p1");
-            $p2 = $this->getArena($args[1])->get("p2");
+            					$p1 = $this->getArena($args[1])->get("p1");
+            					$p2 = $this->getArena($args[1])->get("p2");
 						if($p1 == null){
 							$this->getArena($args[1])->set("p1", $sender->getPlayer()->getName());
 							$this->getArena($args[1])->save();
@@ -45,20 +44,29 @@ class Main extends \pocketmine\plugin\PluginBase implements \pocketmine\event\Li
 							$sender->getPlayer()->sendMessage("Wait a second player");
 						}else{
 							if($p2 == null){
-                $spawn1 = $arena->get("spawn1");
-                $spawn2 = $arena->get("spawn2");
+                						$spawn1 = $arena->get("spawn1");
+                						$spawn2 = $arena->get("spawn2");
 								$this->getArena($args[1])->set("p2", $sender->getPlayer()->getName());
-                $this->getArena($args[1])->save();
-                $this->getPlayerConfig($sender->getPlayer()->getName())->set("Arena", $args[1]);
-                $this->getPlayerConfig($sender->getPlayer()->getName())->save();
-                $sender->getPlayer($p1)->teleport(\pocketmine\math\Vector3($spawn1[0],$spawn1[1],$spawn1[2],$spawn1[3]));
-                $sender->getPlayer($p2)->teleport(\pocketmine\math\Vector3($spawn2[0],$spawn2[1],$spawn2[2],$spawn2[3]));
-                $sender->getPlayer($p1)->sendMessage("Go Go Go.");
-                $sender->getPlayer($p2)->sendMessage("Go Go Go.");
+                						$this->getArena($args[1])->save();
+                						$this->getPlayerConfig($sender->getPlayer()->getName())->set("Arena", $args[1]);
+                						$this->getPlayerConfig($sender->getPlayer()->getName())->save();
+                						$sender->getPlayer($p1)->teleport(\pocketmine\math\Vector3($spawn1[0],$spawn1[1],$spawn1[2],$spawn1[3]));
+                						$sender->getPlayer($p2)->teleport(\pocketmine\math\Vector3($spawn2[0],$spawn2[1],$spawn2[2],$spawn2[3]));
+                						$sender->getPlayer($p1)->sendMessage("Go Go Go.");
+                						$sender->getPlayer($p2)->sendMessage("Go Go Go.");
+							}else{
+								$sender->getPlayer()->sendMessage("This arena $args[1] full");
 							}
 					}else{
 						$sender->sendMessage("This arena [$args[1]] not found !");
 					}
+				}
+				if($args[0] == "leave"){
+					$p1 = $this->getArena($this->getPlayerArena($sender->getPlayer()->getName()))->get("p1");
+					$p2 =
+					if($this->getArena($this->getPlayerArena($sender->getPlayer()->getName()))->get())
+					$this->getPlayerConfig($sender->getPlayer()->getName())->unset("Arena");
+					$this->getPlayerConfig($sender->getPlayer()->getName())->save();
 				}
 				if($sender->isOp()){
 					$arena = $this->getArena($args[1]);
