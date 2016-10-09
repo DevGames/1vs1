@@ -44,5 +44,34 @@ class Main extends \pocketmine\plugin\PluginBase implements \pocketmine\event\Li
 			}
 		}
 	}
+	public function SignClick(\pocketmine\event\player\PlayerInteractEvent $event){
+		$sign = $event->getPlayer()->getLevel()->getTile($event->getBlock());
+		if($sign instanceof \pocketmine\tile\Sign){
+			$text = $sign->getText();
+			if($text[0] == "[1vs1]"){
+				$arena = $this->getArena($text[1]);
+				$spawn1 = $arena->get("spawn1");
+				$spawn2 = $arena->get("spawn2");
+				$p1 = $arena->get("p1");
+				$p2 = $arena->get("p2");
+				if(!$arena->get("1vs1") == null){
+					if($arena->get("p1") == null){
+						$arena->set("p1", $event->getPlayer()->getName());
+						$event->getPlayer()->sendMessage("what the player 2 ...");
+					}else{
+						if($arena->get("p2") == null){
+							$arena->set("p2", $event->getPlayer()->getName());
+							$event->getPlayer($p1)->teleport(\pocketmine\math\Vector3($spawn1[0],$spawn1[1],$spawn1[2],$spawn1[3]));
+							$event->getPlayer($p2)->teleport(\pocketmine\math\Vector3($spawn2[0],$spawn2[1],$spawn2[2],$spawn2[3]));
+							$event->getPlayer($p1)->sendMessage("Go Go Go.");
+							$event->getPlayer($p1)->sendMessage("Go Go Go.");
+						}else{
+							$event->getPlayer()->sendMessage("This arena $text[1] full");
+						}
+					}
+				}
+			}
+		}
+	}
 }
 ?>
