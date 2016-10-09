@@ -5,9 +5,18 @@ class Main extends \pocketmine\plugin\PluginBase implements \pocketmine\event\Li
 		$this->getServer()->getPluginManager()->registerEvents($this, $this);
 		@mkdir($this->getDataFolder());
 		@mkdir($this->getDataFolder()."arena");
-	}	public function getArena($name){
+		@mkdir($this->getDataFolder()."player");
+	}
+	public function getArena($name){
 		$arena = new \pocketmine\utils\Config($this->getDataFolder()."arena/".$name.".yml",\pocketmine\utils\Config::YAML);
 		return $arena;
+	}
+	public function getPlayerConfig($player){
+		$player = new \pocketmine\utils\Config($this->getDataFolder()."player/".$player.".yml",\pocketmine\utils\Config::YAML);
+		return $player;
+	}
+	public function getPlayerArena($player){
+		return $this->getPlayerConfig($player)->get("Arena");
 	}
 	public function onCommand(\pocketmine\command\CommandSender $sender,\pocketmine\command\Command $command, $label,array $args){
 		if($command->getName() == "1vs1"){
