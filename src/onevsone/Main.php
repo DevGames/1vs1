@@ -16,7 +16,7 @@ class Main extends \pocketmine\plugin\PluginBase implements \pocketmine\event\Li
 		return $player;
 	}
 	public function getPlayerArena($player){
-			return $this->getPlayerConfig($player)->get("Arena");
+		return $this->getPlayerConfig($player)->get("Arena");
 	}
 	public function onCommand(\pocketmine\command\CommandSender $sender,\pocketmine\command\Command $command, $label,array $args){
 		if($command->getName() == "1vs1"){
@@ -70,7 +70,7 @@ class Main extends \pocketmine\plugin\PluginBase implements \pocketmine\event\Li
 					}else{
 						$this->getArena($this->getPlayerArena($sender->getPlayer()->getName()))->unset("p2");
 					}
-					$sender->sendMessage("Your Leave arena [$this->getPlayerArena($sender->getPlayer()->getName()]");
+					$sender->sendMessage("Your Leave arena [$this->getPlayerArena($sender->getPlayer()->getName())]");
 					$this->getPlayerConfig($sender->getPlayer()->getName())->unset("Arena");
 					$this->getPlayerConfig($sender->getPlayer()->getName())->save();
 				}
