@@ -33,6 +33,13 @@ class Main extends \pocketmine\plugin\PluginBase implements \pocketmine\event\Li
 					$sender->sendMessage("~^-1vs1-^~");
 					return true;
 				}
+				if($args[1] == "join"){
+					if(!$this->getArena($args[1])->get("1vs1") == null){
+						\\ arena , player 1 , player 2 , full game.
+					}else{
+						$sender->sendMessage("This arena [$args[1]] not found !");
+					}
+				}
 				if($sender->isOp()){
 					$arena = $this->getArena($args[1]);
 					$x = $sender->getFloorX();
