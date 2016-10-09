@@ -16,12 +16,13 @@ class Main extends \pocketmine\plugin\PluginBase implements \pocketmine\event\Li
 					$sender->sendMessage("~^-help-^~");
 					$sender->sendMessage("/1vs1 join <arena> : join for arena");
 					$sender->sendMessage("/1vs1 leave <arena> : leave for arena");
-					if($sender->isOp){
+					if($sender->isOp()){
 						$sender->sendMessage("/1vs1 create <arena> : create new arena");
 						$sender->sendMessage("/1vs1 setspawn1 <arena> : set spawn player 1 for arena");
 						$sender->sendMessage("/1vs1 setspawn2 <arena> : set spawn player 2 for arena");
 					}
 					$sender->sendMessage("~^-1vs1-^~");
+					return true;
 				}
 				if($sender->isOp()){
 					$arena = $this->getArena($args[1]);
@@ -37,16 +38,19 @@ class Main extends \pocketmine\plugin\PluginBase implements \pocketmine\event\Li
 						}else{
 							$sender->sendMessage("this arena [$args[1]] allredy extis");
 						}
+						return true;
 					}
 					if($args[0] == "setspawn1"){
 						$arena->set("spawn1",array($x,$y,$z,$level));
 						$arena->save();
 						$sender->sendMessage("spawn player 1 x: $x y: $y z: $z level: $level");
+						return true;
 					}
 					if($args[0] == "setspawn2"){
 						$arena->set("spawn2",array($x,$y,$z,$level));
 						$arena->save();
 						$sender->sendMessage("spawn player 2 x: $x y: $y z: $z level: $level");
+						return true;
 					}
 				}
 			}else{
@@ -67,10 +71,12 @@ class Main extends \pocketmine\plugin\PluginBase implements \pocketmine\event\Li
 				if(!$arena->get("1vs1") == null){
 					if($arena->get("p1") == null){
 						$arena->set("p1", $event->getPlayer()->getName());
+						$arena->save();
 						$event->getPlayer()->sendMessage("Wait a second player");
 					}else{
 						if($arena->get("p2") == null){
 							$arena->set("p2", $event->getPlayer()->getName());
+							$arena->save();
 							$event->getPlayer($p1)->teleport(\pocketmine\math\Vector3($spawn1[0],$spawn1[1],$spawn1[2],$spawn1[3]));
 							$event->getPlayer($p2)->teleport(\pocketmine\math\Vector3($spawn2[0],$spawn2[1],$spawn2[2],$spawn2[3]));
 							$event->getPlayer($p1)->sendMessage("Go Go Go.");
