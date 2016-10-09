@@ -24,7 +24,7 @@ class Main extends \pocketmine\plugin\PluginBase implements \pocketmine\event\Li
 				if($args[0] == "help"){
 					$sender->sendMessage("~^-help-^~");
 					$sender->sendMessage("/1vs1 join <arena> : join for arena");
-					$sender->sendMessage("/1vs1 leave <arena> : leave for arena");
+					$sender->sendMessage("/1vs1 leave : leave for arena");
 					if($sender->isOp()){
 						$sender->sendMessage("/1vs1 create <arena> : create new arena");
 						$sender->sendMessage("/1vs1 setspawn1 <arena> : set spawn player 1 for arena");
@@ -35,15 +35,26 @@ class Main extends \pocketmine\plugin\PluginBase implements \pocketmine\event\Li
 				}
 				if($args[1] == "join"){
 					if(!$this->getArena($args[1])->get("1vs1") == null){
-						if($this->getArena($args[1])->get("p1") == null){
+            $p1 = $this->getArena($args[1])->get("p1");
+            $p2 = $this->getArena($args[1])->get("p2");
+						if($p1 == null){
 							$this->getArena($args[1])->set("p1", $sender->getPlayer()->getName());
 							$this->getArena($args[1])->save();
 							$this->getPlayerConfig($sender->getPlayer()->getName())->set("Arena", $args[1]);
 							$this->getPlayerConfig($sender->getPlayer()->getName())->save();
 							$sender->getPlayer()->sendMessage("Wait a second player");
 						}else{
-							if($this->getArena($args[1])->get("p2") == null){
-								
+							if($p2 == null){
+                $spawn1 = $arena->get("spawn1");
+                $spawn2 = $arena->get("spawn2");
+								$this->getArena($args[1])->set("p2", $sender->getPlayer()->getName());
+                $this->getArena($args[1])->save();
+                $this->getPlayerConfig($sender->getPlayer()->getName())->set("Arena", $args[1]);
+                $this->getPlayerConfig($sender->getPlayer()->getName())->save();
+                $sender->getPlayer($p1)->teleport(\pocketmine\math\Vector3($spawn1[0],$spawn1[1],$spawn1[2],$spawn1[3]));
+                $sender->getPlayer($p2)->teleport(\pocketmine\math\Vector3($spawn2[0],$spawn2[1],$spawn2[2],$spawn2[3]));
+                $sender->getPlayer($p1)->sendMessage("Go Go Go.");
+                $sender->getPlayer($p2)->sendMessage("Go Go Go.");
 							}
 					}else{
 						$sender->sendMessage("This arena [$args[1]] not found !");
