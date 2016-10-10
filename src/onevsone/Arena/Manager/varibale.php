@@ -12,12 +12,11 @@ class varibale {
   
   public $player = array();
   
-  public function checkRound($round){
-   
-    array_map(function($m)
-              {if($m !== $round)
-              {return;}
-              },$this->round);
+  public function checkRound($round,$name = null){ # Garbage
+   return array_map(function ($a)
+{
+  if($a == $round){return;}
+},$this->round));
   }
   
 }
