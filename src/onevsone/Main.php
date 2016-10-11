@@ -18,7 +18,8 @@ class Main extends \pocketmine\plugin\PluginBase implements \pocketmine\event\Li
 	public function getPlayerArena($player){
 		return $this->getPlayerConfig($player)->get("Arena");
 	}
-	public function onCommand(\pocketmine\command\CommandSender $sender,\pocketmine\command\Command $command, $label,array $args){		if($command->getName() == "1vs1"){
+	public function onCommand(\pocketmine\command\CommandSender $sender,\pocketmine\command\Command $command, $label,array $args){
+		if($command->getName() == "1vs1"){
  			if($sender instanceof \pocketmine\Player){
 				if($args[0] == "help"){
 					$sender->sendMessage("~^-help-^~");
@@ -65,12 +66,12 @@ class Main extends \pocketmine\plugin\PluginBase implements \pocketmine\event\Li
 					$p1 = $this->getArena($this->getPlayerArena($sender->getPlayer()->getName()))->get("p1");
 					$p2 = $this->getArena($this->getPlayerArena($sender->getPlayer()->getName()))->get("p2");
 					if($p1 == $sender->getPlayer()->getName()){
-						$this->getArena($this->getPlayerArena($sender->getPlayer()->getName()))->unset("p1");
+						$this->getArena($this->getPlayerArena($sender->getPlayer()->getName()))->remove("p1");
 					}else{
-						$this->getArena($this->getPlayerArena($sender->getPlayer()->getName()))->unset("p2");
+						$this->getArena($this->getPlayerArena($sender->getPlayer()->getName()))->remove("p2");
 					}
-					$sender->sendMessage("Your Leave arena [$this->getPlayerArena($sender->getPlayer()->getName())]");
-					$this->getPlayerConfig($sender->getPlayer()->getName())->unset("Arena");
+					$sender->sendMessage("Your Leave arena [".$this->getPlayerArena($sender->getPlayer()->getName())."]");
+					$this->getPlayerConfig($sender->getPlayer()->getName())->remove("Arena");
 					$this->getPlayerConfig($sender->getPlayer()->getName())->save();
 				}
 				if($sender->isOp()){
