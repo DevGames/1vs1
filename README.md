@@ -4,5 +4,5 @@
 - [X] Join Arena.
 - [X] Leave Arena.
 - [X] Create Arena.
-- [] Sign Join Arena.
-- [] Round Arena.
+- [ ] Sign Join Arena.
+- [ ] Round Arena.
