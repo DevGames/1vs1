@@ -50,12 +50,12 @@ class Main extends \pocketmine\plugin\PluginBase implements \pocketmine\event\Li
 								$this->getArena($args[1])->set("p2", $sender->getPlayer()->getName());
                 						$this->getArena($args[1])->save();
                 						$this->getPlayerConfig($sender->getPlayer()->getName())->set("Arena", $args[1]);                						$this->getPlayerConfig($sender->getPlayer()->getName())->save();
-                						$sender->getPlayer($p1)->teleport(\pocketmine\math\Vector3($spawn1[0],$spawn1[1],$spawn1[2],$spawn1[3]));
-                						$sender->getPlayer($p2)->teleport(\pocketmine\math\Vector3($spawn2[0],$spawn2[1],$spawn2[2],$spawn2[3]));
+                						$sender->getPlayer($p1)->teleport(new \pocketmine\math\Vector3($spawn1[0],$spawn1[1],$spawn1[2],$spawn1[3]));
+                						$sender->getPlayer($p2)->teleport(new \pocketmine\math\Vector3($spawn2[0],$spawn2[1],$spawn2[2],$spawn2[3]));
                 						$sender->getPlayer($p1)->sendMessage("Go Go Go.");
                 						$sender->getPlayer($p2)->sendMessage("Go Go Go.");
 							}else{
-								$sender->getPlayer()->sendMessage("This arena $args[1] full");
+								$sender->getPlayer()->sendMessage("This arena [$args[1]] full");
 							}
 						}
 					}else{
@@ -66,12 +66,12 @@ class Main extends \pocketmine\plugin\PluginBase implements \pocketmine\event\Li
 					$p1 = $this->getArena($this->getPlayerArena($sender->getPlayer()->getName()))->get("p1");
 					$p2 = $this->getArena($this->getPlayerArena($sender->getPlayer()->getName()))->get("p2");
 					if($p1 == $sender->getPlayer()->getName()){
-						$this->getArena($this->getPlayerArena($sender->getPlayer()->getName()))->remove("p1");
+						$this->getArena($this->getPlayerArena($sender->getPlayer()->getName()))->set("p1",null);
 					}else{
-						$this->getArena($this->getPlayerArena($sender->getPlayer()->getName()))->remove("p2");
+						$this->getArena($this->getPlayerArena($sender->getPlayer()->getName()))->set("p2",null);
 					}
 					$sender->sendMessage("Your Leave arena [".$this->getPlayerArena($sender->getPlayer()->getName())."]");
-					$this->getPlayerConfig($sender->getPlayer()->getName())->remove("Arena");
+					$this->getPlayerConfig($sender->getPlayer()->getName())->set("Arena",null);
 					$this->getPlayerConfig($sender->getPlayer()->getName())->save();
 				}
 				if($sender->isOp()){
@@ -127,8 +127,8 @@ class Main extends \pocketmine\plugin\PluginBase implements \pocketmine\event\Li
 						if($arena->get("p2") == null){
 							$arena->set("p2", $event->getPlayer()->getName());
 							$arena->save();
-							$event->getPlayer($p1)->teleport(\pocketmine\math\Vector3($spawn1[0],$spawn1[1],$spawn1[2],$spawn1[3]));
-							$event->getPlayer($p2)->teleport(\pocketmine\math\Vector3($spawn2[0],$spawn2[1],$spawn2[2],$spawn2[3]));
+							$event->getPlayer($p1)->teleport(new \pocketmine\math\Vector3($spawn1[0],$spawn1[1],$spawn1[2],$spawn1[3]));
+							$event->getPlayer($p2)->teleport(new \pocketmine\math\Vector3($spawn2[0],$spawn2[1],$spawn2[2],$spawn2[3]));
 							$event->getPlayer($p1)->sendMessage("Go Go Go.");
 							$event->getPlayer($p2)->sendMessage("Go Go Go.");
 						}else{
