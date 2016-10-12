@@ -9,7 +9,7 @@ class Stats extends Player {
     }
     
     public function getRounds(){
-        return $this->namedtag["round"];
+        return $this->namedtag["game"]["round"];
     }
     
 }
