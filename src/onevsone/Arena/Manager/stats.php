@@ -1,6 +1,6 @@
 <?php
 
-namespace NawafPlugin\Arena\Manager;
+namespace onevsone\Arena\Manager;
 
 class Stats extends Player {
    
