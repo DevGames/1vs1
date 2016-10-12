@@ -1,22 +1,14 @@
 <?php
 
-namespace Arena\Manager\varibale;
+namespace onevsone\Arena\Manager;
+  
 
-class varibale {
- 
-  public $round = array();
-  
-  public $time = array();
-  
-  #public $reload = array();
-  
-  public $player = array();
-  
-  public function checkRound($round,$name = null){ # Garbage
-   return array_map(function ($a)
-{
-  if($a == $round){return;}
-},$this->round));
-  }
-  
+class Variable extends Player {
+
+    public $namedtag = array();
+    
+    public function Variable(){
+       return array_map(function($k){if(count($k) == 0){$this->namedtag["info"] = "nawaf";}}, $this->namedtag);
+    }
 }
+?>
