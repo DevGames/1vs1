@@ -8,8 +8,12 @@ class Stats extends Player {
         $this->namedtag["name"] = $name;
     }
     
-    public function getRounds(){
-        return $this->namedtag["game"]["round"];
+    public function getRound(){
+        return $this->namedtag["game"][$this->namedtag["name"]]["round"];
+    }
+   
+   public function setRound($amount){
+        return $this->namedtag["game"][$this->namedtag["name"]]["round"] = $amount;
     }
     
 }
