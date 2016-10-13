@@ -105,7 +105,13 @@ class Main extends \pocketmine\plugin\PluginBase implements \pocketmine\event\Li
 		}
 	}
 	
-	public function RoundUpdate(){
+	public function RoundUpdate($ev){
+		
+		if(in_array($ev->getPlayer()->getName(),$this->api->getGame()["player"])){
+		$this->api->setRound($this->api->getRound() - 1);
+	        //$this->.... : SOON : 
+		}
+		
 	}
 	
 	public function SignClick(\pocketmine\event\player\PlayerInteractEvent $event){
@@ -118,6 +124,7 @@ class Main extends \pocketmine\plugin\PluginBase implements \pocketmine\event\Li
 		        #full
 			return;
 			}
+				$stats->setRound(3);
 				$this->api->add();
                         }}}
 ?>
