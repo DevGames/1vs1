@@ -1,22 +1,18 @@
 <?php
 namespace onevsone;
 class Main extends \pocketmine\plugin\PluginBase implements \pocketmine\event\Listener{
+	
+	public $api;
+	
 	public function onEnable(){
 		$this->getServer()->getPluginManager()->registerEvents($this, $this);
 		@mkdir($this->getDataFolder());
 		@mkdir($this->getDataFolder()."arena");
-		@mkdir($this->getDataFolder()."player");
+		$this->api = new API();
 		}
 	public function getArena($name){
 		$arena = new \pocketmine\utils\Config($this->getDataFolder()."arena/".$name.".yml",\pocketmine\utils\Config::YAML);
 		return $arena;
-	}
-	public function getPlayerConfig($player){
-		$player = new \pocketmine\utils\Config($this->getDataFolder()."player/".$player.".yml",\pocketmine\utils\Config::YAML);
-		return $player;
-	}
-	public function getPlayerArena($player){
-		return $this->getPlayerConfig($player)->get("Arena");
 	}
 	public function onCommand(\pocketmine\command\CommandSender $sender,\pocketmine\command\Command $command, $label,array $args){
 		if($command->getName() == "1vs1"){
@@ -109,35 +105,15 @@ class Main extends \pocketmine\plugin\PluginBase implements \pocketmine\event\Li
 		}
 	}
 	public function SignClick(\pocketmine\event\player\PlayerInteractEvent $event){
+		$stats = new new \onevsone\Arena\Manager\Stats($event->getPlayer()->getName());
 		$sign = $event->getPlayer()->getLevel()->getTile($event->getBlock());
 		if($sign instanceof \pocketmine\tile\Sign){
 			$text = $sign->getText();
 			if($text[0] == "[1vs1]"){
-				$arena = $this->getArena($text[1]);
-				$spawn1 = $arena->get("spawn1");
-				$spawn2 = $arena->get("spawn2");
-				$p1 = $arena->get("p1");
-				$p2 = $arena->get("p2");
-				if(!$arena->get("1vs1") == null){
-					if($arena->get("p1") == null){
-						$arena->set("p1", $event->getPlayer()->getName());
-						$arena->save();
-						$event->getPlayer()->sendMessage("Wait a second player");
-					}else{
-						if($arena->get("p2") == null){
-							$arena->set("p2", $event->getPlayer()->getName());
-							$arena->save();
-							$event->getPlayer($p1)->teleport(new \pocketmine\math\Vector3($spawn1[0],$spawn1[1],$spawn1[2],$spawn1[3]));
-							$event->getPlayer($p2)->teleport(new \pocketmine\math\Vector3($spawn2[0],$spawn2[1],$spawn2[2],$spawn2[3]));
-							$event->getPlayer($p1)->sendMessage("Go Go Go.");
-							$event->getPlayer($p2)->sendMessage("Go Go Go.");
-						}else{
-							$event->getPlayer()->sendMessage("This arena $text[1] full");
-						}
-					}
-				}
+			if(count($this->api->getArray()["player"]) >= 8){
+		        #full
+			return;
 			}
-		}
-	}
-}
+				$this->api->add();
+                        }}}
 ?>
