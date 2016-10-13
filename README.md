@@ -1,8 +1,8 @@
 # 1vs1
 1vs1 Plugin IN PocketMine
 # Job Edit
-- [ ] Join Arena.
+- [ true ] Join Arena.
 - [ ] Leave Arena.
 - [ ] Create Arena.
-- [ ] Sign Join Arena.
-- [ ] Round Arena.
+- [ true ] Sign Join Arena.
+- [ true ] Round Arena.
