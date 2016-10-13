@@ -120,7 +120,7 @@ class Main extends \pocketmine\plugin\PluginBase implements \pocketmine\event\Li
 		if($sign instanceof \pocketmine\tile\Sign){
 			$text = $sign->getText();
 			if($text[0] == "[1vs1]"){
-			if(count($this->api->getArray()["player"]) >= 8){
+			if(count($this->api->getArray()["player"]) >= 2){
 		        #full
 			return;
 			}
