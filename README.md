@@ -1,8 +1,8 @@
 # 1vs1
 1vs1 Plugin IN PocketMine
 # Job Edit
-- [ true ] Join Arena.
+- [ true ] Join Arena. : Nawaf
 - [ ] Leave Arena.
 - [ ] Create Arena.
-- [ true ] Sign Join Arena.
-- [ true ] Round Arena.
+- [ true ] Sign Join Arena. : Nawaf
+- [ true ] Round Arena. : Nawaf
