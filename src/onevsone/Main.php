@@ -104,6 +104,10 @@ class Main extends \pocketmine\plugin\PluginBase implements \pocketmine\event\Li
 			}
 		}
 	}
+	
+	public function RoundUpdate(){
+	}
+	
 	public function SignClick(\pocketmine\event\player\PlayerInteractEvent $event){
 		$stats = new new \onevsone\Arena\Manager\Stats($event->getPlayer()->getName());
 		$sign = $event->getPlayer()->getLevel()->getTile($event->getBlock());
