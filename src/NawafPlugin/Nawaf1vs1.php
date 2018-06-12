@@ -43,15 +43,6 @@ class Nawaf1vs1 extends PluginBase implements Listener {
                 
                 $this->player["stats"][statsUpdate::$name] = array(statsUpdate::$name,0,$this->g,$ev->getPlayer());
                 $this->player[statsUpdate::$name] = statsUpdate::$name;
-                
-            if($this->class["player"]->getCount() == 1){
-            $ev->getPlayer()->teleport(new Vector3($g["x1"], $g["y1"], $g["z1"]));
-            }
-            if($this->class["player"]->getCount() == 2){
-            $ev->getPlayer()->teleport(new Vector3($g["x1"], $g["y1"], $g["z1"]));
-            $this->class["time"]->setTime(60);
-            $this->class["mode"]->setWait();
-            }
             
             }else{
                 
